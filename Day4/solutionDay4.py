@@ -4,9 +4,31 @@ def readFile(filename):
     fileObject.close()
     return entries
 
-passports = []
-counter = 0
+"""
+Passport fields:
+byr (Birth Year)
+iyr (Issue Year)
+eyr (Expiration Year)
+hgt (Height)
+hcl (Hair Color)
+ecl (Eye Color)
+pid (Passport ID) - optional
+cid (Country ID)
+"""
+
+validPassports = 0
 inputFile = "inputDay4.txt"
 passports = readFile(inputFile)
 
-print(passports)
+for person in passports:
+    person = person.replace("\n", " ")
+    counter = 0
+    for character in person:
+        if character == ":":
+            counter += 1
+    if "cid" not in person and counter == 7:
+        validPassports += 1
+    elif counter == 8:
+        validPassports += 1
+
+print(validPassports)
